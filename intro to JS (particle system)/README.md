@@ -1,4 +1,4 @@
-enough for 85%
+**enough for 85%**
 
 This first week was good. It was awesome to get to know the instructor and learn that we're going to be learning things that will carry value in our engineering journey. I really enjoy the memes and the style of teaching, I'm a pretty visual person and I love a fun class.
 
