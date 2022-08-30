@@ -2,22 +2,60 @@
 
     <head>
 
-        <script>
-            var myCanvas;
-
-            init()
-            
+        <script>            
+            var c;
+            var ctx; 
+            var sceneList = []
+            var currentFrame = 0
+ 
             function init() {
-                myCanvas = document.getElementById("drawArea")
+                c = document.getElementById("da")
 
-                // console.log('hello world')
-                draw()
+                updateAndDraw()
             }
 
-            function draw() {
-                var ctx = myCanvas.getContext("2d");
-                ctx.fillRect(20, 20, 100, 100);
-                //            x  y    w    h                        
+            function updateAndDraw() {
+                currentFrame++
+                var randomR = Math.floor(Math.random() * 255)
+                var randomG = Math.floor(Math.random() * 255)                                                 
+                var randomB = Math.floor(Math.random() * 255)                                                 
+
+                var newRectangle = new Rectangle(Math.floor(Math.random() * 300), Math.floor(Math.random() * 200), "rgb("+randomR+","+randomG+","+randomB+")")
+                // console.log(newRectangle)
+                sceneList.push(newRectangle)
+
+                for (let i = 0; i < sceneList.length; i++) {
+                    // console.log('drawing')
+                    sceneList[i].draw();
+                }
+                
+                window.requestAnimationFrame(updateAndDraw)
+                updateStats()
+            }
+
+            function updateStats() {
+                var p = document.getElementById("frameCount")
+                p.innerText = "Frame Count: " + currentFrame;
+
+                var p = document.getElementById("rectangleCount")
+                p.innerText = "Rectangle Count: " + sceneList.length
+            }
+
+
+            function Rectangle(h, w, color) {
+                this.h = h
+                this.w = w
+                this.color = color
+                
+                this.draw = function() {
+                    ctx = c.getContext("2d");
+
+                    // console.log(this)
+
+                    ctx.fillStyle = this.color
+                    ctx.fillRect(this.h, this.w, 50, 50)
+                    ctx.strokeRect(this.h, this.w, 50, 50); 
+                }
             }
 
         </script>
@@ -26,14 +64,14 @@
 
     <body onload="init()">
 
-        <canvas id="drawArea" width="300px" height="200px" style="border: solid;">
+        <canvas id="da" width="300px" height="200px" style="border: solid;">
             
         </canvas>
 
         <br>
 
-        <p>Frame Count: 0</p>
-        <p>Rectangle Count: 0</p>
+        <p id="frameCount">Frame Count: 0</p>
+        <p id="rectangleCount">Rectangle Count: 0</p>
 
         <br>
         
