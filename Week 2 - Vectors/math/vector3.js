@@ -9,7 +9,9 @@
  */
 
 var Vector3 = function(x, y, z) {
-  this.x = x; this.y = y; this.z = z;
+  this.x = x || 0; 
+  this.y = y || 0; 
+  this.z = z || 0;
 
   // Sanity check to prevent accidentally using this as a normal function call
   if (!(this instanceof Vector3)) {
@@ -24,6 +26,9 @@ Vector3.prototype = {
   //----------------------------------------------------------------------------- 
   set: function(x, y, z) {
     // todo set 'this' object's values to those from x, y, and z
+    this.x = x;
+    this.y = y;
+    this.z = z;
     return this;
   },
 
@@ -35,6 +40,9 @@ Vector3.prototype = {
   //----------------------------------------------------------------------------- 
   copy: function(other) {
     // copy the values from other into 'this'
+    this.x = other.x;
+    this.y = other.y;
+    this.z = other.z;
     return this;
   },
 
@@ -42,6 +50,9 @@ Vector3.prototype = {
   negate: function() {
     // multiply 'this' vector by -1
     // This SHOULD change the values of this.x, this.y, and this.z
+    this.x = this.x * -1
+    this.y = this.y * -1
+    this.z = this.z * -1
     return this;
   },
 
@@ -49,6 +60,9 @@ Vector3.prototype = {
   add: function(v) {
     // todo - add v to 'this' vector
     // This SHOULD change the values of this.x, this.y, and this.z
+    this.x = this.x + v
+    this.y = this.y + v
+    this.z = this.z + v
     return this;
   },
 
@@ -56,6 +70,9 @@ Vector3.prototype = {
   subtract: function(v) {
     // todo - subtract v from 'this' vector
     // This SHOULD change the values of this.x, this.y, and this.z
+    this.x = this.x - v
+    this.y = this.y - v 
+    this.z = this.z - v
     return this;
   },
 
