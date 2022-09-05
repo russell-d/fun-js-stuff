@@ -80,6 +80,9 @@ Vector3.prototype = {
   multiplyScalar: function(scalar) {
     // multiply 'this' vector by "scalar"
     // This SHOULD change the values of this.x, this.y, and this.z
+    this.x = this.x * scalar
+    this.y = this.y * scalar
+    this.z = this.z * scalar
     return this;
   },
 
@@ -87,7 +90,8 @@ Vector3.prototype = {
   length: function() {
     // todo - return the magnitude (A.K.A. length) of 'this' vector
     // This should NOT change the values of this.x, this.y, and this.z
-    return 0;
+    let magnitude = Math.sqrt((this.x * this.x) + (this.y * this.y) + (this.z * this.z))
+    return magnitude;
   },
 
   //----------------------------------------------------------------------------- 
@@ -98,7 +102,8 @@ Vector3.prototype = {
     // There are many occasions where knowing the exact length is unnecessary 
     // and the square can be substituted instead (for performance reasons).  
     // This function should not have to take the square root of anything.
-    return 0;
+    let magnitude = this.length()
+    return magnitude * magnitude
   },
 
   //----------------------------------------------------------------------------- 
@@ -110,7 +115,7 @@ Vector3.prototype = {
 
   //----------------------------------------------------------------------------- 
   dot: function(other) {
-    // todo - return the dot product betweent this vector and "other"
+    // todo - return the dot product between this vector and "other"
     // This should NOT change the values of this.x, this.y, and this.z
     return 0;
   },
