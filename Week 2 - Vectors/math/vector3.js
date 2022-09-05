@@ -102,8 +102,8 @@ Vector3.prototype = {
     // There are many occasions where knowing the exact length is unnecessary 
     // and the square can be substituted instead (for performance reasons).  
     // This function should not have to take the square root of anything.
-    let magnitude = this.length()
-    return magnitude * magnitude
+    let magnitude = this.length() * this.length()
+    return magnitude
   },
 
   //----------------------------------------------------------------------------- 
