@@ -143,12 +143,25 @@ Vector3.prototype = {
     //        NOTE - "fromPoint" and "toPoint" should not be altered
   },
 
+
   //----------------------------------------------------------------------------- 
   project: function(vectorToProject, otherVector) {
     // todo - return a vector that points in the same direction as "otherVector"
     //        but whose length is the projection of "vectorToProject" onto "otherVector"
     //        NOTE - "vectorToProject" and "otherVector" should NOT be altered (i.e. use clone)
     //        See class slides or visit https://en.wikipedia.org/wiki/Vector_projection for more detail.
+
+    var dotProduct = (vectorToProject.x * otherVector.x) + (vectorToProject.y * otherVector.y) + (vectorToProject.z * otherVector.z)  
+    var mag = Math.pow(otherVector.x, 2) + Math.pow(otherVector.y, 2) + Math.pow(otherVector.z, 2)
+     
+    var proj = dotProduct / mag
+    
+    var result = new Vector3(
+      proj * otherVector.x, 
+      proj * otherVector.y, 
+      proj * otherVector.z)
+
+    return result;
   }
 };
 
