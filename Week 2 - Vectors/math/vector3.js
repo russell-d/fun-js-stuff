@@ -60,9 +60,9 @@ Vector3.prototype = {
   add: function(v) {
     // todo - add v to 'this' vector
     // This SHOULD change the values of this.x, this.y, and this.z
-    this.x = this.x + v
-    this.y = this.y + v
-    this.z = this.z + v
+    this.x = this.x + v.x
+    this.y = this.y + v.y
+    this.z = this.z + v.z
     return this;
   },
 
@@ -70,9 +70,9 @@ Vector3.prototype = {
   subtract: function(v) {
     // todo - subtract v from 'this' vector
     // This SHOULD change the values of this.x, this.y, and this.z
-    this.x = this.x - v
-    this.y = this.y - v 
-    this.z = this.z - v
+    this.x = this.x - v.x
+    this.y = this.y - v.y
+    this.z = this.z - v.z
     return this;
   },
 
@@ -110,14 +110,23 @@ Vector3.prototype = {
   normalize: function() {
     // todo - Change the components of this vector so that its magnitude will equal 1.
     // This SHOULD change the values of this.x, this.y, and this.z
+    
+    var s = Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+  
+    this.x = this.x / s;
+    this.y = this.y / s;
+    this.z = this.z / s;
+
     return this;
   },
 
   //----------------------------------------------------------------------------- 
   dot: function(other) {
-    // todo - return the dot product between this vector and "other"
+    // todo - return the dot product betweent this vector and "other"
     // This should NOT change the values of this.x, this.y, and this.z
-    return 0;
+
+    var result = this.x * other.x + this.y * other.y + this.z * other.z;
+    return result;
   },
 
 
