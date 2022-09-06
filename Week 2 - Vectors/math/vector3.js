@@ -152,6 +152,7 @@ Vector3.prototype = {
     //        See class slides or visit https://en.wikipedia.org/wiki/Vector_projection for more detail.
 
     var dotProduct = (vectorToProject.x * otherVector.x) + (vectorToProject.y * otherVector.y) + (vectorToProject.z * otherVector.z)  
+    
     var mag = Math.pow(otherVector.x, 2) + Math.pow(otherVector.y, 2) + Math.pow(otherVector.z, 2)
      
     var proj = dotProduct / mag
