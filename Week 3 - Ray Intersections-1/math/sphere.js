@@ -20,8 +20,8 @@ var Sphere = function(center, radius) {
     console.error("Sphere constructor must be called with the new operator");
   }
 
-  this.center = center;
-  this.radius = radius;
+  this.center = center || new Vector3(0, 0, 0);
+  this.radius = radius || 1;
 
   // todo - make sure this.center and this.radius are replaced with default values if and only if they
   // are invalid or undefined (i.e. center should be of type Vector3 & radius should be a Number)
@@ -74,14 +74,57 @@ Sphere.prototype = {
     //        distance: 'a scalar containing the intersection distance from the ray origin'
     //      }
 
-    // An object created from a literal that we will return as our result
-    // Replace the null values in the properties below with the right values
-    var result = {
-      hit: null,      // should be of type Boolean
-      point: null,    // should be of type Vector3
-      normal: null,   // should be of type Vector3
-      distance: null, // should be of type Number (scalar)
-    };
+    var result;
+
+    var a = 1
+    var b = 2 * r1.direction.clone().dot(r1.origin.clone().subtract(this.center))
+    var c = (r1.origin.clone().subtract(this.center)).dot(r1.origin.clone().subtract(this.center)) - (this.radius * this.radius)
+  
+    var discriminant = Math.sqrt(b * b - 4 * a * c)
+
+    if (discriminant < 0 || isNaN(discriminant)) { // Invalid
+      result = {
+        hit: false,
+        point: null
+      }
+    } else if (discriminant == 0) {
+      var alpha = -b / 2
+      var pRay = r1.origin.clone().add(r1.direction.clone().multiplyScalar(alpha))
+      var distance = pRay - this.center;
+      var normal = new Vector3(0, 0, 1);
+
+      if (pRay - this.center == this.radius) {
+        result = {
+          hit: true,
+          point: pRay,
+          normal: null,
+          distance: distance
+        }  
+      }
+    } else {
+      var plusAlpha = (-b + discriminant) / 2
+      var minusAlpha = (-b - discriminant) / 2
+
+      var pRayPlus = r1.origin.clone().add(r1.direction.clone().multiplyScalar(plusAlpha))
+      var pRayMinus = r1.origin.clone().add(r1.direction.clone().multiplyScalar(minusAlpha))
+
+      if (!(pRayPlus - this.center == this.radius)) {
+        result = {
+          hit: true,
+          point: pRay,
+          normal: null,
+          distance: distance
+        }  
+      } 
+    }
+
+  
+    if (minusAlpha < 0 || plusAlpha < 0) {
+      result = {
+        hit: false,
+        point: null
+      }
+    }
 
     return result;
   }
