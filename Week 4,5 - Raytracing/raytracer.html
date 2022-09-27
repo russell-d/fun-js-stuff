@@ -116,8 +116,6 @@ function updateAndRender(timeElapsed) {
 			var sphereResult = sphere.raycast(pixelRay);
 			var planeResult = plane.raycast(pixelRay);
 
-			
-
 			if (sphereResult.hit == true && planeResult.hit == true) { 
 				if (sphereResult.distance < planeResult.distance) { 
 					var direction = new Vector3().fromTo(sphereResult.point, lightPosition.normalize())
@@ -134,8 +132,8 @@ function updateAndRender(timeElapsed) {
 				}
 			} else if (sphereResult.hit == true) {
 				var direction = new Vector3().fromTo(sphereResult.point, lightPosition.normalize())
-					var sphereNormal = sphereResult.point.normalize()
-					var normalDotLight = sphereNormal.dot(direction.normalize());
+				var sphereNormal = sphereResult.point.normalize()
+				var normalDotLight = sphereNormal.dot(direction.normalize());
 
 				setPixelColor(xPixelIndex, yPixelIndex, normalDotLight)
 			} else if (planeResult.hit == true) {
