@@ -325,9 +325,17 @@ Matrix4.prototype = {
 		// It should be constructed using the distance from 
 		// the center to the left, right, top, bottom, near, and far planes 
 
+		for (var i = 0; i < 16; i++) {
+			e[i] = 0
+		}
 
-
-
+		e[0] = 2 / (right - left)
+		e[3] = -(right+left)/(right-left)
+		e[5] = 2/(top-bottom)
+		e[7] = -(top+bottom)/(top-bottom)
+		e[10] = -2/(far-near)
+		e[11] = -(far+near)/(far-near)
+		e[15] = 1
 
 		return this;
 	},
