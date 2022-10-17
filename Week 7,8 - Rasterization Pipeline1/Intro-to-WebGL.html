@@ -129,16 +129,16 @@
 			var fragmentShader = createCompiledShader(gl, fragmentShaderText, gl.FRAGMENT_SHADER);
 
 			// todo #5 - delete the "return" line below when instructed by the guide
-			return;
+			
 
 			// todo #5
 			// Create an empty gl "program" which will be composed of compiled shaders
 			shaderProgram = gl.createProgram();
-			gl.attachShader(shaderProgram, /* todo #5 - arg2*/);
-			gl.attachShader(shaderProgram, /* todo #5 - arg2*/);
+			gl.attachShader(shaderProgram, vertexShader);
+			gl.attachShader(shaderProgram, fragmentShader);
 
 			// Tell gl it's ready to go, link it
-			gl.linkProgram(/* todo #5 - arg1*/);
+			gl.linkProgram(shaderProgram);
 			if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
 				alert("Could not initialise shaders");
 			}
