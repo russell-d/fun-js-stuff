@@ -82,7 +82,7 @@
 
 			// todo #3
 			// uncomment when directed by the guide
-			// createShaders();
+			createShaders();
 
 			createTriangleGeometry();
 
@@ -97,7 +97,7 @@
 		// -------------------------------------------------------------------------
 		function initGL() {
 			// todo #1 - uncomment below when ready
-			var canvas = document.getElementById(/* todo - choose correct id */);
+			var canvas = document.getElementById('webgl-canvas');
 
 			try {
 				gl = canvas.getContext("webgl");
@@ -117,16 +117,16 @@
 		function createShaders() {
 			// todo #3
 			// Get the objects representing individual shaders
-			var vertexShaderText = document.getElementById(/* todo #3 - choose correct id*/).textContent;
+			var vertexShaderText = document.getElementById('shader-vs').textContent;
 
 			// todo #3
-			var fragmentShaderText = document.getElementById(/* todo #3 - choose the correct id*/).textContent;
+			var fragmentShaderText = document.getElementById('shader-fs').textContent;
 
 			// todo #4 - uncomment when directed
-			// var vertexShader = createCompiledShader(gl, vertexShaderText, gl.VERTEX_SHADER);
+			var vertexShader = createCompiledShader(gl, vertexShaderText, gl.VERTEX_SHADER);
 
 			// todo #4 - uncomment when directed
-			// var fragmentShader = createCompiledShader(gl, fragmentShaderText, gl.FRAGMENT_SHADER);
+			var fragmentShader = createCompiledShader(gl, fragmentShaderText, gl.FRAGMENT_SHADER);
 
 			// todo #5 - delete the "return" line below when instructed by the guide
 			return;
@@ -165,8 +165,8 @@
 			var shader = gl.createShader(shaderType);
 
 			// todo #4 - uncomment this when ready to implement
-			// gl.shaderSource(/* todo argument 1*/, /* todo argument 2*/);
-			// gl.compileShader(/* todo argument 1*/);
+			gl.shaderSource(shader, shaderText);
+			gl.compileShader(shader);
 
 			if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
 				alert(gl.getShaderInfoLog(shader));
@@ -258,7 +258,7 @@
 			// todo #2
 			// specify what portion of the canvas we want to draw to (all of it, full width and height)
 			// uncomment when ready to implement
-			// gl.viewport(0, 0, /* width of viewport equal to canvas width*/, /*height of viewport equal to canvas height*/);
+			gl.viewport(0, 0, gl.canvasWidth, gl.canvasHeight);
 
 			// this is a new frame so let's clear out whatever happened last frame
 			gl.clearColor(0.707, 0.707, 1, 1.0);
