@@ -207,6 +207,17 @@
 			// 4. "buffer" color data
 			// 5. store a reference to the color buffer on the triangleGeometry object
 			//    triangleGeometry.colorBuffer = ??;
+
+			var colorBuffer = gl.createBuffer()
+			gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer)
+			var RGB = [
+				255.0, 0.0, 0.0,
+				0.0, 255.0, 0.0,
+				0.0, 0.0, 255.0,
+			]
+			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(RGB), gl.STATIC_DRAW)
+
+			triangleGeometry.colorBuffer = colorBuffer
 		}
 
 		// -------------------------------------------------------------------------
