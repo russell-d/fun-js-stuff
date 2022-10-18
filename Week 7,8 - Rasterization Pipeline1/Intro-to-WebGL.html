@@ -27,9 +27,8 @@
             vec4(aVertexPosition, 1.0); // treat the vertex as a point, multiply right to left
 
         // todo #8
-        vColor = vec3(0.0, 0.0, 0.0);
-		aVertexColor = vColor;
-    }
+        vColor = aVertexColor;
+	}
 </script>
 
 	<!-- fragment shader - Pixel color is determined here -->
@@ -156,6 +155,9 @@
 
 			// todo #9
 			// Get a reference to the color attribute variable in the vertex shader and enable it
+			shaderProgram.vertexColorAttribute = gl.getAttribLocation(shaderProgram, "aVertexColor");
+			gl.enableVertexAttribArray(shaderProgram.vertexColorAttribute);
+
 
 			shaderProgram.worldMatrixUniform = gl.getUniformLocation(shaderProgram, "uWorldMatrix");
 			shaderProgram.viewMatrixUniform = gl.getUniformLocation(shaderProgram, "uViewMatrix");
@@ -213,9 +215,9 @@
 			var colorBuffer = gl.createBuffer()
 			gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer)
 			var RGB = [
-				255.0, 0.0, 0.0,
-				0.0, 255.0, 0.0,
-				0.0, 0.0, 255.0,
+				1.0, 0.0, 0.0,
+				0.0, 1.0, 0.0,
+				0.0, 0.0, 1.0,
 			]
 			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(RGB), gl.STATIC_DRAW)
 
@@ -310,6 +312,15 @@
 			);
 
 			// todo #10 - map the color buffer similar to the position buffer above
+			gl.bindBuffer(gl.ARRAY_BUFFER, triangleGeometry.colorBuffer)
+			gl.vertexAttribPointer(
+				triangleGeometry.shaderProgram.vertexColorAttribute,
+				3,
+				gl.FLOAT,
+				gl.FALSE,
+				0,
+				0
+			)
 
 			// Send our matrices to the shader
 			gl.uniformMatrix4fv(shaderProgram.worldMatrixUniform, false, triangleGeometry.worldMatrix.clone().transpose().elements);
