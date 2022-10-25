@@ -105,16 +105,25 @@ function createScene() {
     groundGeometry.create();
 
     // todo #1 - translate the quad so you can see it
-    // groundGeometry.worldMatrix...
+    groundGeometry.worldMatrix.makeTranslation(0, -1, -10)
 
     // todo #2 - rotate and scale the quad to make it "ground-like"
+    var ggm = new Matrix4().makeScale(10, 10, 10)
+    var xRot = groundGeometry.worldMatrix.clone().makeRotationX(90)
+
+    groundGeometry.worldMatrix.multiply(xRot)
+    groundGeometry.worldMatrix.multiply(ggm)
 
     // todo #3 - create the sphere geometry
-    // sphereGeometry = ?
-    // sphereGeometry.create(?);
+    sphereGeometry = new WebGLGeometryJSON(gl)
+    sphereGeometry.create(loadedAssets.sphereJSON)
 
-    // todo #4 - scale and translate the sphere
-    // sphere.Geometry.worldMatrix...
+    // // todo #4 - scale and translate the sphere
+    var sgm = new Matrix4().makeScale(0.01, 0.01, 0.01)
+
+    sphereGeometry.worldMatrix.makeTranslation(0, 0, -5)
+    sphereGeometry.worldMatrix.multiply(sgm)
+    
 }
 
 // -------------------------------------------------------------------------
@@ -139,9 +148,15 @@ function updateAndRender() {
     groundGeometry.render(camera, projectionMatrix, colorProgram);
 
     // todo #4 - change color for the sphere
-
+    
     // todo #9 - animate the color of there sphere
+    var shade = .5
+    var sShade = Math.sin(time.secondsElapsedSinceStart)
+    gl.uniform4f(colorProgram.uniforms.colorUniform, 0.5, 0.5, 1, sShade, sShade)
+
     // todo #10 - animate the color with non-grayscale values
 
     // todo #3 - render the sphere
+    
+    sphereGeometry.render(camera, projectionMatrix, colorProgram)
 }
