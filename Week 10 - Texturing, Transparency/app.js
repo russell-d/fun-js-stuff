@@ -48,6 +48,8 @@ function initGL(canvas) {
         // todo #7
         // todo enable depth test (z-buffering)
         // todo enable backface culling
+        gl.enable(gl.DEPTH_TEST)
+        gl.enable(gl.CULL_FACE)
     } catch (e) {}
 
     if (!gl) {
@@ -153,6 +155,8 @@ function updateAndRender() {
     //   1. enable blending
     //   2. set blend mode source to gl.SRC_ALPHA and destination to gl.ONE_MINUS_SRC_ALPHA
 
+    gl.enable(gl.BLEND)
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
     // todo #10 apply the painter's algorithm
 
     // todo #6
