@@ -56,7 +56,7 @@ function WebGLGeometryQuad (gl) {
 		if (rawImage) {
 			// todo #4 - create the texture (uncomment when ready)
 			// 1.
-			const texture = gl.createTexture();
+			this.texture = gl.createTexture();
 
 			// 2. bind the texture
 			gl.bindTexture(gl.TEXTURE_2D, this.texture);
@@ -66,19 +66,14 @@ function WebGLGeometryQuad (gl) {
 
 			// 3. set wrap modes (for s and t) for the texture
 			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-      	 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-       		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-
-			// 4. set filtering modes (magnification and minification)
-			// gl.NEAREST is also allowed, instead of gl.LINEAR, as neither mipmap.
-			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-			// Prevents s-coordinate wrapping (repeating).
-			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-			// Prevents t-coordinate wrapping (repeating).
 			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 
+			// 4. set filtering modes (magnification and minification)
+			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+
 			// 5. send the image WebGL to use as this texture
-			
+			gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA,  gl.UNSIGNED_BYTE, rawImage);
 
 			// We're done for now, unbind
 			this.gl.bindTexture(gl.TEXTURE_2D, null);
@@ -133,7 +128,7 @@ function WebGLGeometryQuad (gl) {
 			// todo #4
 			// uncomment when ready
 			gl.activeTexture(gl.TEXTURE);
-			gl.bindTexture(gl.TEXTURE_2D, texture);
+			gl.bindTexture(gl.TEXTURE_2D, this.texture);
 		}
 
 		// Send our matrices to the shader

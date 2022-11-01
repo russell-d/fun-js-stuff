@@ -157,9 +157,9 @@ function updateAndRender() {
 
     // todo #6
     // uncomment when directed by guide
-    // for (var i = 0; i < sphereGeometryList.length; ++i) {
-    //     sphereGeometryList[i].render(camera, projectionMatrix, textureShaderProgram);
-    // }
+    for (var i = 0; i < sphereGeometryList.length; ++i) {
+        sphereGeometryList[i].render(camera, projectionMatrix, textureShaderProgram);
+    }
 
     // todo - disable blending
 }
