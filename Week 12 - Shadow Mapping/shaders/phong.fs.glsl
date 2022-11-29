@@ -32,7 +32,10 @@ void main(void) {
   vec4 lightSpaceNDC = uLightVPMatrix * vec4(vWorldPosition, 1.0);
 
   // scale and bias the light-space NDC xy coordinates from [-1, 1] to [0, 1]
-  vec2 lightSpaceUV = ((lightSpaceNDC.xy + 1.0) / 2.0);
+  float x = ((lightSpaceNDC.x + 1.0) / 2.0);
+  float y = ((lightSpaceNDC.y + 1.0) / 2.0);
+
+  vec2 lightSpaceUV = vec2(x, y);
 
   gl_FragColor = vec4(lightSpaceUV.x, lightSpaceUV.y, 0.0, 1.0);
 
