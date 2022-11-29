@@ -246,12 +246,13 @@ function updateAndRender () {
 	gl.disable(gl.CULL_FACE);
 	groundGeometry.render(lightCamera, shadowProjectionMatrix, depthWriteProgram);
 	teapotGeometry.render(lightCamera, shadowProjectionMatrix, depthWriteProgram);
+	
 
 	gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 	gl.bindRenderbuffer(gl.RENDERBUFFER, null);
 
 	// render scene normally and use the depth texture to apply shadows ################
-
+	
 	// specify what portion of the canvas we want to draw to (all of it, full width and height)
 	gl.viewport(0, 0, gl.canvasWidth, gl.canvasHeight);
 
