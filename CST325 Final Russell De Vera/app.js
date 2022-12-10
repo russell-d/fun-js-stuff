@@ -195,9 +195,7 @@ function createScene() {
     lightGeo = new WebGLGeometryJSON(gl, colorProgram)
     lightGeo.create(loadedAssets.sphereJSON)
     lightGeo.worldMatrix.setIdentity()
-    lightGeo.worldMatrix.multiplyRightSide(new Matrix4().scale(0.02, 0.02, 0.02))
-
-
+    lightGeo.worldMatrix.multiplyRightSide(new Matrix4().scale(0.029, 0.029, 0.029))
 
     sunGeo = new WebGLGeometryJSON(gl, textureShaderProgram)
     sunGeo.create(loadedAssets.sphereJSON, loadedAssets.sun)
