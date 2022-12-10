@@ -20,6 +20,13 @@ var sunGeo = null;
 var earthGeo = null;
 var moonGeo = null;
 var lightGeo = null;
+var jupt = null;
+var mars = null;
+var merc = null;
+var nept = null;
+var saturn = null; 
+var uran = null;
+var venu = null;
 
 // positions
 var earthPos = new Vector3();
@@ -43,7 +50,14 @@ var loadedAssets = {
     moon: null,
     nx: null, nz: null, px: null, py: null, pz: null,
     sphereJSON: null,
-    colorVS: null, colorFS: null
+    colorVS: null, colorFS: null,
+    jup : null,
+    mars : null,
+    merc : null,
+    nept : null,
+    saturn : null, 
+    uran : null,
+    venu : null,
 };
 
 // -------------------------------------------------------------------------
@@ -90,6 +104,13 @@ function loadAssets(onLoadedCB) {
         fetch('./data/sphere.json').then((response) => { return response.json(); }),
         fetch('./shaders/flat.color.vs.glsl').then((response) => { return response.text(); }),
         fetch('./shaders/flat.color.fs.glsl').then((response) => { return response.text(); }),
+        loadImage('./data/jupiter.jpg'),
+        loadImage('./data/mars.jpg'),
+        loadImage('./data/mercury.jpg'),
+        loadImage('./data/neptune.jpg'),
+        loadImage('./data/saturn.jpg'),
+        loadImage('./data/uranus.jpg'),
+        loadImage('./data/venusAt.jpg'),
 
     ];
 
@@ -108,6 +129,13 @@ function loadAssets(onLoadedCB) {
         loadedAssets.sphereJSON = values[10];
         loadedAssets.colorVS = values[11];
         loadedAssets.colorFS = values[12];
+        loadedAssets.jup = values[13];
+        loadedAssets.mars = values[14],
+        loadedAssets.merc = values[15],
+        loadedAssets.nept = values[16],
+        loadedAssets.saturn = values[17], 
+        loadedAssets.uran = values[18],
+        loadedAssets.venu = values[19]
     }).catch(function(error) {
         console.error(error.message);
     }).finally(function() {
@@ -214,6 +242,41 @@ function createScene() {
     moonGeo.worldMatrix.setIdentity()
     moonGeo.worldMatrix.multiplyRightSide(new Matrix4().scale(0.01, 0.01, 0.01))
     // moonGeo.worldMatrix.translate(10, 16, 0)
+
+    jupt = new WebGLGeometryJSON(gl, textureShaderProgram)
+    jupt.create(loadedAssets.sphereJSON, loadedAssets.jup)
+    jupt.worldMatrix.setIdentity()
+    jupt.worldMatrix.multiplyRightSide(new Matrix4().scale(0.01, 0.01, 0.01))
+    
+    mars = new WebGLGeometryJSON(gl, textureShaderProgram)
+    mars.create(loadedAssets.sphereJSON, loadedAssets.mars)
+    mars.worldMatrix.setIdentity()
+    mars.worldMatrix.multiplyRightSide(new Matrix4().scale(0.01, 0.01, 0.01))
+
+    merc = new WebGLGeometryJSON(gl, textureShaderProgram)
+    merc.create(loadedAssets.sphereJSON, loadedAssets.merc)
+    merc.worldMatrix.setIdentity()
+    merc.worldMatrix.multiplyRightSide(new Matrix4().scale(0.01, 0.01, 0.01))
+
+    nept = new WebGLGeometryJSON(gl, textureShaderProgram)
+    nept.create(loadedAssets.sphereJSON, loadedAssets.nept)
+    nept.worldMatrix.setIdentity()
+    nept.worldMatrix.multiplyRightSide(new Matrix4().scale(0.01, 0.01, 0.01))
+
+    saturn = new WebGLGeometryJSON(gl, textureShaderProgram)
+    saturn.create(loadedAssets.sphereJSON, loadedAssets.saturn)
+    saturn.worldMatrix.setIdentity()
+    saturn.worldMatrix.multiplyRightSide(new Matrix4().scale(0.01, 0.01, 0.01))
+
+    uran = new WebGLGeometryJSON(gl, textureShaderProgram)
+    uran.create(loadedAssets.sphereJSON, loadedAssets.uran)
+    uran.worldMatrix.setIdentity()
+    uran.worldMatrix.multiplyRightSide(new Matrix4().scale(0.01, 0.01, 0.01))
+
+    venu = new WebGLGeometryJSON(gl, textureShaderProgram)
+    venu.create(loadedAssets.sphereJSON, loadedAssets.venu)
+    venu.worldMatrix.setIdentity()
+    venu.worldMatrix.multiplyRightSide(new Matrix4().scale(0.01, 0.01, 0.01))
     
 }
 
@@ -239,16 +302,69 @@ function updateAndRender() {
     moonGeo.worldMatrix.multiplyRightSide(new Matrix4().scale(0.0025, 0.0025, 0.0025))
     moonGeo.worldMatrix.translate(6.5, 0, 0)
 
+    jupt.worldMatrix.setRotationY(time.secondsElapsedSinceStart * 200)
+    jupt.worldMatrix.multiplyRightSide(new Matrix4().scale(0.01, 0.01, 0.01))
+    jupt.worldMatrix.translate(10, 0, 0)
+
+    mars.worldMatrix.setRotationY(time.secondsElapsedSinceStart * 200)
+    mars.worldMatrix.multiplyRightSide(new Matrix4().scale(0.01, 0.01, 0.01))
+    mars.worldMatrix.translate(8.5, 0, 0)
+
+    merc.worldMatrix.setRotationY(time.secondsElapsedSinceStart * 200)
+    merc.worldMatrix.multiplyRightSide(new Matrix4().scale(0.01, 0.01, 0.01))
+    merc.worldMatrix.translate(2, 0, 0)
+
+    nept.worldMatrix.setRotationY(time.secondsElapsedSinceStart * 200)
+    nept.worldMatrix.multiplyRightSide(new Matrix4().scale(0.01, 0.01, 0.01))
+    nept.worldMatrix.translate(16, 0, 0)
+
+    saturn.worldMatrix.setRotationY(time.secondsElapsedSinceStart * 200)
+    saturn.worldMatrix.multiplyRightSide(new Matrix4().scale(0.01, 0.01, 0.01))
+    saturn.worldMatrix.translate(12, 0, 0)
+
+    uran.worldMatrix.setRotationY(time.secondsElapsedSinceStart * 200)
+    uran.worldMatrix.multiplyRightSide(new Matrix4().scale(0.01, 0.01, 0.01))
+    uran.worldMatrix.translate(14, 0, 0)
+
+    venu.worldMatrix.setRotationY(time.secondsElapsedSinceStart * 200)
+    venu.worldMatrix.multiplyRightSide(new Matrix4().scale(0.01, 0.01, 0.01))
+    venu.worldMatrix.translate(4, 0, 0)
+
 
     var cosTime = Math.cos(time.secondsElapsedSinceStart);
     var sinTime = Math.sin(time.secondsElapsedSinceStart);
+    
+    var cosTime2 = Math.cos(time.secondsElapsedSinceStart / 2);
+    var sinTime2 = Math.sin(time.secondsElapsedSinceStart / 2);
 
-    earthGeo.worldMatrix.setTranslation(sinTime * 5, 0, cosTime * 5)
+    var cosTime3 = Math.cos(time.secondsElapsedSinceStart / 3);
+    var sinTime3 = Math.sin(time.secondsElapsedSinceStart / 3);
+
+    var cosTime4 = Math.cos(time.secondsElapsedSinceStart / 4);
+    var sinTime4 = Math.sin(time.secondsElapsedSinceStart / 4);
+
+    var cosTime5 = Math.cos(time.secondsElapsedSinceStart / 5);
+    var sinTime5 = Math.sin(time.secondsElapsedSinceStart / 5);
+
+    var cosTime6 = Math.cos(time.secondsElapsedSinceStart / 6);
+    var sinTime6 = Math.sin(time.secondsElapsedSinceStart / 6);
+
+    var cosTime7 = Math.cos(time.secondsElapsedSinceStart / 7);
+    var sinTime7 = Math.sin(time.secondsElapsedSinceStart / 7);
+
+    earthGeo.worldMatrix.setTranslation(sinTime * 6, 0, cosTime * 6)
+    jupt.worldMatrix.setTranslation(sinTime4 * 10, 0, cosTime4 * 10)
+    mars.worldMatrix.setTranslation(sinTime5 * 8.5, 0, cosTime5 * 8.5)
+    merc.worldMatrix.setTranslation(sinTime3 * 2.5, 0, cosTime3 * 2.5)
+    nept.worldMatrix.setTranslation(sinTime7 * 16, 0, cosTime7 * 16)
+    saturn.worldMatrix.setTranslation(sinTime2 * 12, 0, cosTime2 * 12)
+    uran.worldMatrix.setTranslation(sinTime3 * 14, 0, cosTime3 * 14)
+    venu.worldMatrix.setTranslation(sinTime6 * 4, 0, cosTime6 * 4)
 
     var cosTimeM = Math.cos(time.secondsElapsedSinceStart * 4);
     var sinTimeM = Math.sin(time.secondsElapsedSinceStart * 4);
 
-    moonGeo.worldMatrix.setTranslation(sinTimeM * 1 + (sinTime * 5), 0, cosTimeM * 1 + (cosTime * 5))
+    moonGeo.worldMatrix.setTranslation(sinTimeM * 1 + (sinTime * 6), 0, cosTimeM * 1 + (cosTime * 6))
 
     // specify what portion of the canvas we want to draw to (all of it, full width and height)
     gl.viewport(0, 0, gl.canvasWidth, gl.canvasHeight);
@@ -269,4 +385,11 @@ function updateAndRender() {
     earthGeo.render(camera, projectionMatrix,  textureShaderProgram)
     moonGeo.render(camera, projectionMatrix,  textureShaderProgram)
     lightGeo.render(camera, projectionMatrix, colorProgram)
+    jupt.render(camera, projectionMatrix, textureShaderProgram)
+    mars.render(camera, projectionMatrix, textureShaderProgram)
+    merc.render(camera, projectionMatrix, textureShaderProgram)
+    nept.render(camera, projectionMatrix, textureShaderProgram)
+    saturn.render(camera, projectionMatrix, textureShaderProgram)
+    uran.render(camera, projectionMatrix, textureShaderProgram)
+    venu.render(camera, projectionMatrix, textureShaderProgram)
 }
