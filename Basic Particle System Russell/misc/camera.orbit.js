@@ -1,3 +1,5 @@
+// Russell De Vera's Code
+
 function OrbitCamera (input) {
 	this.cameraWorldMatrix = new Matrix4();
 	this.cameraTarget = new Vector4(0, 0, 0, 1);
